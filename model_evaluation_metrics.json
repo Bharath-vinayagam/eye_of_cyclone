@@ -1,0 +1,36 @@
+{
+  "timestamp": "2025-11-07 08:26:23",
+  "regression_metrics": {
+    "mse": 0.0159713727662069,
+    "rmse": 0.12637789666791777,
+    "mae": 0.09878418758518137,
+    "r2_score": -0.17301839443147304,
+    "max_error_pixels": 112.12224265109258
+  },
+  "detection_metrics": {
+    "threshold_1px": {
+      "accuracy_percent": 0.32751091703056767,
+      "precision": 0.0032751091703056767,
+      "recall": 1.0,
+      "f1_score": 0.006528835690968444
+    },
+    "threshold_5px": {
+      "accuracy_percent": 2.292576419213974,
+      "precision": 0.02292576419213974,
+      "recall": 1.0,
+      "f1_score": 0.0448239060832444
+    },
+    "threshold_10px": {
+      "accuracy_percent": 9.06113537117904,
+      "precision": 0.0906113537117904,
+      "recall": 1.0,
+      "f1_score": 0.1661661661661662
+    },
+    "threshold_20px": {
+      "accuracy_percent": 30.786026200873362,
+      "precision": 0.3078602620087336,
+      "recall": 1.0,
+      "f1_score": 0.4707846410684474
+    }
+  }
+}

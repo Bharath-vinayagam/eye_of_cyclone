@@ -1,0 +1,54 @@
+# Model files (too large for GitHub)
+*.h5
+*.pt
+*.pth
+*.ckpt
+*.keras
+
+# Dataset files
+*.h5
+cyclone_dataset.h5
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Environment
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Training outputs (can be large)
+runs/
+*.cache
+labels.cache
+
+# Large dataset folders (uncomment if you don't want to upload datasets)
+# datasets/
+
+# Logs
+*.log
+
+# Model evaluation outputs (optional - uncomment if you don't want to track these)
+# model_evaluation_metrics.json
+# model_parameters.json
+

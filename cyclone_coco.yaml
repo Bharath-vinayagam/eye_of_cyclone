@@ -1,0 +1,7 @@
+path: datasets/cyclone_eye
+
+train: train/images
+val: valid/images
+
+nc: 1
+names: ['eye']

@@ -1,0 +1,153 @@
+{
+  "model_name": "ResNet50-based Cyclone Eye Detection",
+  "timestamp": "2025-11-07 07:50:16",
+  "dataset": {
+    "total_samples": 4580,
+    "training_samples": 3664,
+    "validation_samples": 916,
+    "test_split": 0.2,
+    "image_size": "(201, 201, 3)",
+    "label_format": "Normalized coordinates [0, 1]",
+    "label_range": {
+      "x_min": 0.04768060638242318,
+      "x_max": 0.9950248756218906,
+      "y_min": 0.0,
+      "y_max": 0.9383566171957738
+    }
+  },
+  "architecture": {
+    "base_model": "ResNet50 (ImageNet pretrained)",
+    "input_shape": "(201, 201, 3)",
+    "output_shape": "(2,)",
+    "total_layers": 185,
+    "trainable_layers": 40,
+    "frozen_layers": "First 145 layers (frozen)",
+    "unfrozen_layers": "Last 30 layers (fine-tuned)",
+    "backbone": {
+      "name": "ResNet50",
+      "pretrained": true,
+      "weights": "ImageNet",
+      "include_top": false
+    },
+    "head": {
+      "type": "Custom Regression Head",
+      "layers": [
+        {
+          "type": "GlobalAveragePooling2D",
+          "output_size": "2048"
+        },
+        {
+          "type": "Dense",
+          "units": 1024,
+          "activation": "relu"
+        },
+        {
+          "type": "BatchNormalization"
+        },
+        {
+          "type": "Dropout",
+          "rate": 0.4
+        },
+        {
+          "type": "Dense",
+          "units": 512,
+          "activation": "relu"
+        },
+        {
+          "type": "BatchNormalization"
+        },
+        {
+          "type": "Dropout",
+          "rate": 0.3
+        },
+        {
+          "type": "Dense",
+          "units": 256,
+          "activation": "relu"
+        },
+        {
+          "type": "Dropout",
+          "rate": 0.2
+        },
+        {
+          "type": "Dense",
+          "units": 2,
+          "activation": "sigmoid"
+        }
+      ],
+      "total_parameters": 26348674
+    }
+  },
+  "training": {
+    "optimizer": {
+      "type": "Adam",
+      "learning_rate": 0.0001,
+      "beta_1": 0.9,
+      "beta_2": 0.999
+    },
+    "loss_function": {
+      "type": "Huber Loss",
+      "delta": 0.1,
+      "description": "More robust to outliers than MSE"
+    },
+    "metrics": [
+      "mae",
+      "mse"
+    ],
+    "batch_size": 32,
+    "max_epochs": 50,
+    "early_stopping": {
+      "enabled": true,
+      "monitor": "val_loss",
+      "patience": 15,
+      "min_delta": 1e-06,
+      "restore_best_weights": true
+    },
+    "learning_rate_schedule": {
+      "type": "ReduceLROnPlateau",
+      "monitor": "val_loss",
+      "factor": 0.5,
+      "patience": 5,
+      "min_lr": 1e-07
+    },
+    "model_checkpoint": {
+      "enabled": true,
+      "monitor": "val_loss",
+      "save_best_only": true,
+      "filename": "best_resnet50_model.h5"
+    }
+  },
+  "augmentation": {
+    "enabled": true,
+    "rotation_range": 10,
+    "width_shift_range": 0.1,
+    "height_shift_range": 0.1,
+    "horizontal_flip": false,
+    "vertical_flip": false,
+    "fill_mode": "nearest",
+    "note": "No flipping to preserve cyclone structure"
+  },
+  "results": {
+    "training_history": {
+      "total_epochs": 16,
+      "final_training_loss": 0.006302823778241873,
+      "final_validation_loss": 0.01453892607241869,
+      "final_training_mae": 0.1016615554690361,
+      "final_validation_mae": 0.18964320421218872,
+      "best_epoch": 1,
+      "best_val_loss": 0.005944715812802315
+    },
+    "validation": {
+      "loss": 0.005944715812802315,
+      "mae": 0.0987841784954071,
+      "mse": 0.01597137376666069,
+      "distance_error_pixels": {
+        "mean": 30.958002830919508,
+        "median": 27.887774766653994,
+        "std": 18.22418510564414,
+        "p95": 66.06514982912391,
+        "p99": 87.13576043306277
+      }
+    }
+  }
+}
