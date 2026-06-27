@@ -1,11 +1,11 @@
 {
-  "timestamp": "2025-11-07 08:26:23",
+  "timestamp": "2025-11-08 17:08:03",
   "regression_metrics": {
-    "mse": 0.0159713727662069,
-    "rmse": 0.12637789666791777,
-    "mae": 0.09878418758518137,
+    "mse_pixels": 645.2594310220011,
+    "rmse_pixels": 25.40195722817439,
+    "mae_pixels": 19.85562173255302,
     "r2_score": -0.17301839443147304,
-    "max_error_pixels": 112.12224265109258
+    "max_error_pixels": 112.12224269541929
   },
   "detection_metrics": {
     "threshold_1px": {
