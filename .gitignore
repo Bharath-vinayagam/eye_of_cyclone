@@ -38,7 +38,7 @@ ENV/
 Thumbs.db
 
 # Training outputs (can be large)
-runs/
+# runs/
 *.cache
 labels.cache
 
